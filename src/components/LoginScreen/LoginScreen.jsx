@@ -3,42 +3,53 @@ import {
   Text,
   TextInput,
   TouchableHighlight,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { styles } from "./LoginScreen.styled";
+import bgImage from "../../../assets/bg_photo.png";
+import { loginScreenStyles } from "./LoginScreen.styled";
 
 const LoginScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Увійти</Text>
-      <View style={styles.textInputWrapper}>
-        <TextInput
-          placeholder="Адреса електронної пошти"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          style={styles.textInput}
-        />
-        <View style={styles.passwordInputWrapper}>
+    <ImageBackground source={bgImage} style={loginScreenStyles.bgImage}>
+      <View style={loginScreenStyles.container}>
+        <Text style={loginScreenStyles.title}>Увійти</Text>
+        <View style={loginScreenStyles.textInputWrapper}>
           <TextInput
-            placeholder="Пароль"
-            textContentType="password"
-            secureTextEntry
-            style={styles.textInput}
+            placeholder="Адреса електронної пошти"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+            style={loginScreenStyles.textInput}
           />
-          <Text style={styles.passwordText}>Показати</Text>
+          <View style={loginScreenStyles.passwordInputWrapper}>
+            <TextInput
+              placeholder="Пароль"
+              textContentType="password"
+              secureTextEntry
+              style={loginScreenStyles.textInput}
+            />
+            <TouchableOpacity style={loginScreenStyles.passwordButton}>
+              <Text style={loginScreenStyles.passwordText}>Показати</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <TouchableOpacity
+          style={loginScreenStyles.button}
+          underlayColor="#cf5803"
+        >
+          <Text style={loginScreenStyles.buttonText}>Зареєструватися</Text>
+        </TouchableOpacity>
+
+        <View style={loginScreenStyles.signInWrapper}>
+          <Text style={loginScreenStyles.signInText}>Немає аккаунту? </Text>
+          <TouchableOpacity>
+            <Text style={loginScreenStyles.signInButtonText}>
+              Зареєструватися
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <TouchableHighlight
-        onPress={() => {}}
-        style={styles.button}
-        underlayColor="#cf5803"
-      >
-        <Text style={styles.buttonText}>Зареєструватися</Text>
-      </TouchableHighlight>
-      <Text style={styles.signInText}>
-        Немає аккаунту? <Text style={styles.signIn}>Зареєструватися</Text>
-      </Text>
-    </View>
+    </ImageBackground>
   );
 };
 

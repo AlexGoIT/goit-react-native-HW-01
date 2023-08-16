@@ -1,6 +1,13 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const loginScreenStyles = StyleSheet.create({
+  bgImage: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+
   container: {
     width: "100%",
     paddingTop: 32,
@@ -46,9 +53,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  passwordText: {
+  passwordButton: {
     position: "absolute",
     right: 16,
+  },
+
+  passwordText: {
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
@@ -70,14 +80,22 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
 
+  signInWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
   signInText: {
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
   },
 
-  signIn: {
+  signInButtonText: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
+    fontFamily: "Roboto",
+    fontSize: 16,
+    color: "#1B4371",
   },
 });

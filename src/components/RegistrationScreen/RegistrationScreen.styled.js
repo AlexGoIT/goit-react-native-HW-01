@@ -1,6 +1,13 @@
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const registrationScreenStyles = StyleSheet.create({
+  bgImage: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+
   container: {
     width: "100%",
     paddingTop: 92,
@@ -23,12 +30,15 @@ export const styles = StyleSheet.create({
     top: -60,
   },
 
-  addAvatarButton: {
-    width: 25,
-    height: 25,
+  addAvatarButtonWrapper: {
     position: "absolute",
     bottom: 16,
     right: -12,
+  },
+
+  addAvatarButton: {
+    width: 25,
+    height: 25,
   },
 
   title: {
@@ -63,9 +73,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  passwordText: {
+  passwordButton: {
     position: "absolute",
     right: 16,
+  },
+
+  passwordText: {
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
@@ -87,14 +100,22 @@ export const styles = StyleSheet.create({
     color: "#fff",
   },
 
-  signInText: {
+  signUpWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  signUpText: {
     fontFamily: "Roboto",
     fontSize: 16,
     color: "#1B4371",
   },
 
-  signIn: {
+  signInButtonText: {
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
+    fontFamily: "Roboto",
+    fontSize: 16,
+    color: "#1B4371",
   },
 });
