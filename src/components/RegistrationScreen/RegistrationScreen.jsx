@@ -1,78 +1,71 @@
-import {
-  Image,
-  ImageBackground,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 import bgImage from "../../../assets/bg_photo.png";
 import addImage from "../../../assets/add.png";
-import { registrationScreenStyles } from "./RegistrationScreen.styled";
+
+import {
+  AddAvatarButtonImage,
+  AddAvatarButtonWrapper,
+  AvatarWrapper,
+  BackgroundView,
+  Container,
+  Input,
+  InputWrapper,
+  PasswordButton,
+  PasswordButtonText,
+  PasswordInputWrapper,
+  SignInButtonText,
+  SignInText,
+  SignInWrapper,
+  SignUpButton,
+  SignUpButtonText,
+  Title,
+} from "./RegistrationScreen.styled";
 
 const RegistrationScreen = () => {
   return (
-    <ImageBackground source={bgImage} style={registrationScreenStyles.bgImage}>
-      <View style={registrationScreenStyles.container}>
-        <View style={registrationScreenStyles.avatarWrapper}>
-          <TouchableOpacity
-            style={registrationScreenStyles.addAvatarButtonWrapper}
-          >
-            <Image
-              source={addImage}
-              style={registrationScreenStyles.addAvatarButton}
-            />
-          </TouchableOpacity>
-        </View>
-        <Text style={registrationScreenStyles.title}>Реєстрація</Text>
-        <View style={registrationScreenStyles.textInputWrapper}>
-          <TextInput
-            placeholder="Логін"
-            style={registrationScreenStyles.textInput}
-          />
-          <TextInput
+    <BackgroundView source={bgImage}>
+      <Container>
+        <AvatarWrapper>
+          <AddAvatarButtonWrapper>
+            <AddAvatarButtonImage source={addImage} />
+          </AddAvatarButtonWrapper>
+        </AvatarWrapper>
+
+        <Title>Реєстрація</Title>
+
+        <InputWrapper>
+          <Input placeholder="Логін" />
+          <Input
             placeholder="Адреса електронної пошти"
             keyboardType="email-address"
             textContentType="emailAddress"
-            style={registrationScreenStyles.textInput}
           />
-          <View style={registrationScreenStyles.passwordInputWrapper}>
-            <TextInput
+
+          <PasswordInputWrapper>
+            <Input
               placeholder="Пароль"
               textContentType="password"
               secureTextEntry
-              style={registrationScreenStyles.textInput}
             />
-            <TouchableOpacity style={registrationScreenStyles.passwordButton}>
-              <Text style={registrationScreenStyles.passwordText}>
-                Показати
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity
-          onPress={() => {}}
-          style={registrationScreenStyles.button}
-          underlayColor="#cf5803"
-        >
-          <Text style={registrationScreenStyles.buttonText}>
-            Зареєструватися
-          </Text>
-        </TouchableOpacity>
+            <PasswordButton>
+              <PasswordButtonText>Показати</PasswordButtonText>
+            </PasswordButton>
+          </PasswordInputWrapper>
+        </InputWrapper>
 
-        <View style={registrationScreenStyles.signUpWrapper}>
-          <Text style={registrationScreenStyles.signUpText}>
-            Вже є акаунт?{" "}
-          </Text>
+        <SignUpButton onPress={() => {}} underlayColor="#cf5803">
+          <SignUpButtonText>Зареєструватися</SignUpButtonText>
+        </SignUpButton>
+
+        <SignInWrapper>
+          <SignInText>Вже є акаунт? </SignInText>
+
           <TouchableOpacity>
-            <Text style={registrationScreenStyles.signInButtonText}>
-              Увійти
-            </Text>
+            <SignInButtonText>Увійти</SignInButtonText>
           </TouchableOpacity>
-        </View>
-      </View>
-    </ImageBackground>
+        </SignInWrapper>
+      </Container>
+    </BackgroundView>
   );
 };
 

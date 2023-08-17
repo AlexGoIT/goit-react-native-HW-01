@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import styles from "styled-components/native";
 
 export const BackgroundView = styles.ImageBackground`
