@@ -1,12 +1,6 @@
-import {
-  ImageBackground,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { TouchableOpacity } from "react-native";
 import bgImage from "../../../assets/bg_photo.png";
+
 import {
   BackgroundView,
   Container,
@@ -28,23 +22,27 @@ const LoginScreen = () => {
     <BackgroundView source={bgImage}>
       <Container>
         <Title>Увійти</Title>
+
         <InputWrapper>
           <Input
             placeholder="Адреса електронної пошти"
             keyboardType="email-address"
             textContentType="emailAddress"
           />
+
           <PasswordInputWrapper>
             <Input
               placeholder="Пароль"
               textContentType="password"
               secureTextEntry
             />
+
             <PasswordButton>
               <PasswordButtonText>Показати</PasswordButtonText>
             </PasswordButton>
           </PasswordInputWrapper>
         </InputWrapper>
+
         <SignInButton underlayColor="#cf5803">
           <SignInButtonText>Увійти</SignInButtonText>
         </SignInButton>
