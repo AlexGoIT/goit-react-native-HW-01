@@ -117,3 +117,10 @@ export const SignInButtonText = styles.Text`
   text-decoration-line: underline;
   text-decoration-style: solid;
 `;
+
+export const ErrorText = styles.Text`
+  font-family: Roboto;
+  font-size: 10px;
+  color: #ff0000;
+
+`;
