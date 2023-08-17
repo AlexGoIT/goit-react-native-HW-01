@@ -4,8 +4,8 @@ import RegistrationScreen from "../../components/RegistrationScreen";
 const PostsScreen = () => {
   return (
     <>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      {/* <RegistrationScreen /> */}
+      <LoginScreen />
     </>
   );
 };

@@ -28,7 +28,7 @@ export const Title = styles.Text`
   color: #212121;
 `;
 
-export const InputWrapper = styles.View`
+export const InputWrapper = styles.KeyboardAvoidingView`
   width: 100%;
   margin-top: 33px;
   margin-bottom: 43px;

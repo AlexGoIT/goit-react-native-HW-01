@@ -1,4 +1,8 @@
-import { TouchableOpacity } from "react-native";
+import {
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from "react-native";
 import bgImage from "../../../assets/bg_photo.png";
 
 import {
@@ -17,43 +21,74 @@ import {
   SignUpButtonText,
 } from "./LoginScreen.styled";
 
+import { useInputFormReducer } from "../../hooks/useInputFormReducer";
+import { useReducer, useState } from "react";
+
 const LoginScreen = () => {
+  const [passwordVisible, setPasswordVisible] = useState(true);
+  const [inputsValue, dispatch] = useReducer(useInputFormReducer, {
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = inputsValue;
+
+  const handleSubmit = () => {
+    console.log(inputsValue);
+
+    dispatch({ type: "email", payload: "" });
+    dispatch({ type: "password", payload: "" });
+  };
   return (
     <BackgroundView source={bgImage}>
-      <Container>
-        <Title>Увійти</Title>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <Title>Увійти</Title>
 
-        <InputWrapper>
-          <Input
-            placeholder="Адреса електронної пошти"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-          />
-
-          <PasswordInputWrapper>
+          <InputWrapper>
             <Input
-              placeholder="Пароль"
-              textContentType="password"
-              secureTextEntry
+              name="email"
+              value={email}
+              onChangeText={(text) =>
+                dispatch({ type: "email", payload: text })
+              }
+              placeholder="Адреса електронної пошти"
+              keyboardType="email-address"
+              textContentType="emailAddress"
             />
 
-            <PasswordButton>
-              <PasswordButtonText>Показати</PasswordButtonText>
-            </PasswordButton>
-          </PasswordInputWrapper>
-        </InputWrapper>
+            <PasswordInputWrapper>
+              <Input
+                name="password"
+                value={password}
+                onChangeText={(text) =>
+                  dispatch({ type: "password", payload: text })
+                }
+                placeholder="Пароль"
+                textContentType="password"
+                secureTextEntry={passwordVisible}
+              />
 
-        <SignInButton underlayColor="#cf5803">
-          <SignInButtonText>Увійти</SignInButtonText>
-        </SignInButton>
+              <PasswordButton
+                onPress={() => setPasswordVisible(!passwordVisible)}
+              >
+                <PasswordButtonText>Показати</PasswordButtonText>
+              </PasswordButton>
+            </PasswordInputWrapper>
+          </InputWrapper>
 
-        <SignUpWrapper>
-          <SignUpText>Немає аккаунту? </SignUpText>
-          <TouchableOpacity>
-            <SignUpButtonText>Зареєструватися</SignUpButtonText>
-          </TouchableOpacity>
-        </SignUpWrapper>
-      </Container>
+          <SignInButton onPress={handleSubmit} underlayColor="#cf5803">
+            <SignInButtonText>Увійти</SignInButtonText>
+          </SignInButton>
+
+          <SignUpWrapper>
+            <SignUpText>Немає аккаунту? </SignUpText>
+            <TouchableOpacity>
+              <SignUpButtonText>Зареєструватися</SignUpButtonText>
+            </TouchableOpacity>
+          </SignUpWrapper>
+        </Container>
+      </TouchableWithoutFeedback>
     </BackgroundView>
   );
 };
