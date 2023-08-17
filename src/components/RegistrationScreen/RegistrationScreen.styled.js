@@ -48,10 +48,10 @@ export const Title = styles.Text`
   color: #212121;
 `;
 
-export const InputWrapper = styles.KeyboardAvoidingView`
+export const InputWrapper = styles.View`
   width: 100%;
   margin-top: 33px;
-  padding-bottom: 43px;
+  margin-bottom: 43px;
   gap: 16px;
 `;
 

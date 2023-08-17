@@ -1,5 +1,6 @@
 import {
   Keyboard,
+  KeyboardAvoidingView,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -64,50 +65,52 @@ const LoginScreen = () => {
         <Container>
           <Title>Увійти</Title>
 
-          <InputWrapper>
-            <View>
-              <Input
-                name="email"
-                value={email}
-                onChangeText={(text) =>
-                  dispatch({ type: "email", payload: text })
-                }
-                placeholder="Адреса електронної пошти"
-                keyboardType="email-address"
-                textContentType="emailAddress"
-              />
-              {emailError && (
-                <ErrorText>Невірний формат електронної пошти</ErrorText>
-              )}
-            </View>
-
-            <View>
-              <PasswordInputWrapper>
+          <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={32}>
+            <InputWrapper>
+              <View>
                 <Input
-                  name="password"
-                  value={password}
+                  name="email"
+                  value={email}
                   onChangeText={(text) =>
-                    dispatch({ type: "password", payload: text })
+                    dispatch({ type: "email", payload: text })
                   }
-                  placeholder="Пароль"
-                  textContentType="password"
-                  secureTextEntry={passwordVisible}
+                  placeholder="Адреса електронної пошти"
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
                 />
+                {emailError && (
+                  <ErrorText>Невірний формат електронної пошти</ErrorText>
+                )}
+              </View>
 
-                <PasswordButton
-                  onPress={() => setPasswordVisible(!passwordVisible)}
-                >
-                  <PasswordButtonText>Показати</PasswordButtonText>
-                </PasswordButton>
-              </PasswordInputWrapper>
-              {passwordError && (
-                <ErrorText>
-                  Пароль має містити не менше 8 символів, малі, великі літери та
-                  цифри
-                </ErrorText>
-              )}
-            </View>
-          </InputWrapper>
+              <View>
+                <PasswordInputWrapper>
+                  <Input
+                    name="password"
+                    value={password}
+                    onChangeText={(text) =>
+                      dispatch({ type: "password", payload: text })
+                    }
+                    placeholder="Пароль"
+                    textContentType="password"
+                    secureTextEntry={passwordVisible}
+                  />
+
+                  <PasswordButton
+                    onPress={() => setPasswordVisible(!passwordVisible)}
+                  >
+                    <PasswordButtonText>Показати</PasswordButtonText>
+                  </PasswordButton>
+                </PasswordInputWrapper>
+                {passwordError && (
+                  <ErrorText>
+                    Пароль має містити не менше 8 символів, малі, великі літери
+                    та цифри
+                  </ErrorText>
+                )}
+              </View>
+            </InputWrapper>
+          </KeyboardAvoidingView>
 
           <SignInButton onPress={handleSubmit} underlayColor="#cf5803">
             <SignInButtonText>Увійти</SignInButtonText>
