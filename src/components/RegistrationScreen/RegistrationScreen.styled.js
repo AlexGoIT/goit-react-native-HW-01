@@ -1,121 +1,119 @@
-import { StyleSheet } from "react-native";
+import styles from "styled-components/native";
 
-export const registrationScreenStyles = StyleSheet.create({
-  bgImage: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
+export const BackgroundView = styles.ImageBackground`
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+`;
 
-  container: {
-    width: "100%",
-    paddingTop: 92,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 78,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "start",
-  },
+export const Container = styles.View`
+  width: 100%;
+  padding-top: 92px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 78px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-color: #fff;
+  align-items: center;
+  justify-content: start;
+`;
 
-  avatarWrapper: {
-    width: 120,
-    height: 120,
-    borderRadius: 16,
-    backgroundColor: "#F6F6F6",
-    position: "absolute",
-    top: -60,
-  },
+export const AvatarWrapper = styles.View`
+  width: 120px;
+  height: 120px;
+  border-radius: 16px;
+  background-color: #F6F6F6;
+  position: absolute;
+  top: -60px;
+`;
 
-  addAvatarButtonWrapper: {
-    position: "absolute",
-    bottom: 16,
-    right: -12,
-  },
+export const AddAvatarButtonWrapper = styles.TouchableOpacity`
+  position: absolute;
+  bottom: 16px;
+  right: -12px;
+`;
 
-  addAvatarButton: {
-    width: 25,
-    height: 25,
-  },
+export const AddAvatarButtonImage = styles.Image`
+  width: 25px;
+  height: 25px;
+`;
 
-  title: {
-    fontFamily: "Roboto",
-    fontSize: 30,
-    fontWeight: "500",
-    letterSpacing: 0.3,
-    color: "#212121",
-  },
+export const Title = styles.Text`
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: #212121;
+`;
 
-  textInputWrapper: {
-    width: "100%",
-    marginTop: 33,
-    marginBottom: 43,
-    gap: 16,
-  },
+export const InputWrapper = styles.View`
+  width: 100%;
+  margin-top: 33px;
+  margin-bottom: 43px;
+  gap: 16px;
+`;
 
-  textInput: {
-    width: "100%",
-    height: 50,
-    padding: 16,
-    backgroundColor: "#F6F6F6",
-    fontSize: 16,
-    fontFamily: "Roboto",
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: "#E8E8E8",
-  },
+export const Input = styles.TextInput`
+  width: 100%;
+  height: 50px;
+  padding: 16px;
+  background-color: #F6F6F6;
+  font-size: 16px;
+  font-family: Roboto;
+  border-width: 1px;
+  border-radius: 8px;
+  border-color: #E8E8E8;
+`;
 
-  passwordInputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
+export const PasswordInputWrapper = styles.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
-  passwordButton: {
-    position: "absolute",
-    right: 16,
-  },
+export const PasswordButton = styles.TouchableOpacity`
+  position: absolute;
+  right: 16px;
+`;
 
-  passwordText: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#1B4371",
-  },
+export const PasswordButtonText = styles.Text`
+  font-family: Roboto;
+  font-size: 16px;
+  color: #1B4371;
+`;
 
-  button: {
-    width: "100%",
-    marginBottom: 16,
-    padding: 16,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 100,
-    backgroundColor: "#FF6C00",
-  },
+export const SignUpButton = styles.TouchableOpacity`
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-color: #ff6c00;
+`;
 
-  buttonText: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#fff",
-  },
+export const SignUpButtonText = styles.Text`
+  font-family: Roboto;
+  font-size: 16px;
+  color: #fff;
+`;
 
-  signUpWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
+export const SignInWrapper = styles.View`
+  flex-direction: row;
+  align-items: center;
+`;
 
-  signUpText: {
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#1B4371",
-  },
+export const SignInText = styles.Text`
+  font-family: Roboto;
+  font-size: 16px;
+  color: #1B4371;
+`;
 
-  signInButtonText: {
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
-    fontFamily: "Roboto",
-    fontSize: 16,
-    color: "#1B4371",
-  },
-});
+export const SignInButtonText = styles.Text`
+  font-family: Roboto;
+  font-size: 16px;
+  color: #1B4371;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+`;
