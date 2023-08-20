@@ -1,5 +1,5 @@
-import LoginScreen from "../../components/LoginScreen/LoginScreen";
-import RegistrationScreen from "../../components/RegistrationScreen";
+import LoginScreen from "../../screens/LoginScreen/LoginScreen";
+import RegistrationScreen from "../../screens/RegistrationScreen";
 
 const PostsScreen = () => {
   return (
