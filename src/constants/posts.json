@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "Ліс",
+    "image": "https://i.ibb.co/8sLDFZy/image01.png",
+    "location": "Ivano-Frankivs'k Region, Ukraine",
+    "comments": [
+      {
+        "id": 1,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      },
+      {
+        "id": 2,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      },
+      {
+        "id": 3,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      },
+      {
+        "id": 4,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      }
+    ],
+    "likes": 5
+  },
+  {
+    "id": 2,
+    "title": "Захід на Чорному морі",
+    "image": "https://i.ibb.co/yVqysn3/image02.png",
+    "location": "Ukraine",
+    "comments": [],
+    "likes": 0
+  },
+  {
+    "id": 3,
+    "title": "Старий будиночок у Венеції",
+    "image": "https://i.ibb.co/gP1Xjb1/image03.png",
+    "location": "Italy",
+    "comments": [
+      {
+        "id": 1,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      },
+      {
+        "id": 2,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "author_avatar": "https://picsum.photos/200"
+      }
+    ],
+    "likes": 2
+  }
+]

@@ -1,10 +1,10 @@
 import {
   Keyboard,
   KeyboardAvoidingView,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { Link, useNavigation } from "@react-navigation/native";
 import bgImage from "../../../assets/bg_photo.png";
 
 import {
@@ -29,6 +29,8 @@ import { useInputFormReducer } from "../../hooks/useInputFormReducer";
 import { emailValidate, passwordValidate } from "../../utils/validators";
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
+
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(true);
@@ -58,6 +60,11 @@ const LoginScreen = () => {
 
     dispatch({ type: "email", payload: "" });
     dispatch({ type: "password", payload: "" });
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Home" }],
+    });
   };
   return (
     <BackgroundView source={bgImage}>
@@ -118,9 +125,9 @@ const LoginScreen = () => {
 
           <SignUpWrapper>
             <SignUpText>Немає аккаунту? </SignUpText>
-            <TouchableOpacity>
+            <Link to={{ screen: "Registration" }}>
               <SignUpButtonText>Зареєструватися</SignUpButtonText>
-            </TouchableOpacity>
+            </Link>
           </SignUpWrapper>
         </Container>
       </TouchableWithoutFeedback>

@@ -1,13 +1,13 @@
 import {
   Keyboard,
   KeyboardAvoidingView,
-  Platform,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { Link, useNavigation } from "@react-navigation/native";
+
+import { Feather } from "@expo/vector-icons";
 import bgImage from "../../../assets/bg_photo.png";
-import addImage from "../../../assets/add.png";
 
 import {
   AddAvatarButtonImage,
@@ -27,6 +27,7 @@ import {
   SignUpButtonText,
   Title,
   ErrorText,
+  AvatarImage,
 } from "./RegistrationScreen.styled";
 
 import { useReducer, useState } from "react";
@@ -38,6 +39,7 @@ import {
 } from "../../utils/validators";
 
 const RegistrationScreen = () => {
+  const navigation = useNavigation();
   const [loginError, setLoginError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -77,6 +79,11 @@ const RegistrationScreen = () => {
     dispatch({ type: "name", payload: "" });
     dispatch({ type: "email", payload: "" });
     dispatch({ type: "password", payload: "" });
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Home" }],
+    });
   };
 
   return (
@@ -84,8 +91,13 @@ const RegistrationScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <AvatarWrapper>
-            <AddAvatarButtonWrapper>
-              <AddAvatarButtonImage source={addImage} />
+            <AvatarImage source={null} />
+            <AddAvatarButtonWrapper style={{ borderColor: "#FF6C00" }}>
+              <Feather
+                name="plus"
+                size={25}
+                style={{ transform: [{ rotate: "0deg" }], color: "#FF6C00" }}
+              />
             </AddAvatarButtonWrapper>
           </AvatarWrapper>
 
@@ -157,9 +169,9 @@ const RegistrationScreen = () => {
 
           <SignInWrapper>
             <SignInText>Вже є акаунт? </SignInText>
-            <TouchableOpacity>
+            <Link to={{ screen: "Login" }}>
               <SignInButtonText>Увійти</SignInButtonText>
-            </TouchableOpacity>
+            </Link>
           </SignInWrapper>
         </Container>
       </TouchableWithoutFeedback>

@@ -29,10 +29,20 @@ export const AvatarWrapper = styles.View`
   top: -60px;
 `;
 
+export const AvatarImage = styles.Image`
+  width: 120px;
+  height: 120px;
+`;
+
 export const AddAvatarButtonWrapper = styles.TouchableOpacity`
   position: absolute;
   bottom: 16px;
   right: -12px;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50px;
+  border-width: 1px;
 `;
 
 export const AddAvatarButtonImage = styles.Image`
