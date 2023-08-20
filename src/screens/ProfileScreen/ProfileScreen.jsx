@@ -12,7 +12,7 @@ import Item from "../../components/Item";
 import posts from "../../constants/posts.json";
 
 import { Feather } from "@expo/vector-icons";
-import profileImage from "../../../assets/profile_image2.png";
+import profileImage from "../../../assets/profile_image.png";
 import bgImage from "../../../assets/bg_photo.png";
 import { useNavigation } from "@react-navigation/native";
 
