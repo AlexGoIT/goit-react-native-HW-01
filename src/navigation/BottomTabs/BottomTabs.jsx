@@ -1,7 +1,7 @@
-import { TabBarButton, TabBarContainer } from "./TabBar.styled";
+import { TabBarButton, TabBarContainer } from "./BottomTabs.styled";
 import { Feather } from "@expo/vector-icons";
 
-const TabBar = ({ state, descriptors, navigation }) => {
+const BottomTabs = ({ state, descriptors, navigation }) => {
   const { options } = descriptors[state.routes[state.index].key];
 
   return (
@@ -58,4 +58,4 @@ const TabBar = ({ state, descriptors, navigation }) => {
   );
 };
 
-export default TabBar;
+export default BottomTabs;

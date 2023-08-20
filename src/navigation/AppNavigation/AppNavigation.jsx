@@ -1,76 +1,25 @@
-import { useNavigation } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Feather } from "@expo/vector-icons";
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import PostsScreen from "../../screens/PostsScreen";
-import CreatePostsScreen from "../../screens/CreatePostsScreen";
-import ProfileScreen from "../../screens/ProfileScreen";
-
+import LoginScreen from "../../screens/LoginScreen";
+import RegistrationScreen from "../../screens/RegistrationScreen";
 import BottomTabsNavigation from "../BottomTabsNavigation";
-import LogoutButton from "../../components/LogoutButton";
 
-const Tabs = createBottomTabNavigator();
+const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
-  const navigation = useNavigation();
-
-  const handleLogout = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Login" }],
-    });
-  };
-
   return (
-    <Tabs.Navigator
-      tabBar={(props) => <BottomTabsNavigation {...props} />}
-      initialRouteName="Posts"
-      screenOptions={{
-        headerStyle: {
-          borderBottomWidth: 1,
-          borderBottomColor: "rgba(0, 0, 0, 0.30)",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="Posts"
-        component={PostsScreen}
-        options={{
-          headerTitle: "Публікації",
-          headerTitleAlign: "center",
-          headerRight: () => <LogoutButton onLogout={handleLogout} />,
-        }}
-      />
-      <Tabs.Screen
-        name="Create"
-        component={CreatePostsScreen}
-        options={{
-          active: true,
-          headerTitle: "Створити публікацію",
-          headerTitleAlign: "center",
-          tabBarStyle: {
-            display: "none",
-          },
-          headerLeft: () => (
-            <Feather
-              name="arrow-left"
-              size={24}
-              color="#212121"
-              onPress={navigation.goBack}
-              style={{ marginLeft: 16 }}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Profile"
-        component={ProfileScreen}
-        onLogout={handleLogout}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Tabs.Navigator>
+    <NavigationContainer>
+      <MainStack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
+        <MainStack.Screen name="Login" component={LoginScreen} />
+        <MainStack.Screen name="Registration" component={RegistrationScreen} />
+        <MainStack.Screen name="Home" component={BottomTabsNavigation} />
+      </MainStack.Navigator>
+    </NavigationContainer>
   );
 };
 
