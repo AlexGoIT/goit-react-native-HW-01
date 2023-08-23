@@ -58,13 +58,19 @@ const CreatePostScreen = () => {
   }, []);
 
   const handleTakePhoto = async () => {
-    if (cameraRef) {
-      const { uri } = await cameraRef.takePictureAsync();
-      await MediaLibrary.createAssetAsync(uri);
-
-      setPhoto(uri);
-      setDisabled(false);
+    if (!cameraRef) {
+      return;
     }
+
+    if (permission?.status !== "granted") {
+      await requestPermission();
+    }
+
+    const { uri } = await cameraRef.takePictureAsync();
+    await MediaLibrary.createAssetAsync(uri);
+
+    setPhoto(uri);
+    setDisabled(false);
   };
 
   // Обробка натискання на кнопку "Опублікувати"
@@ -116,18 +122,7 @@ const CreatePostScreen = () => {
     <>
       <BackgroundView>
         <ImageWrapper>
-          {permission?.status !== "granted" ? (
-            <>
-              <Text
-                style={{ color: "red", marginBottom: 16, textAlign: "center" }}
-              >
-                Потрібно дозволити доступ до камери
-              </Text>
-              <TouchableOpacity onPress={() => requestPermission()}>
-                <Feather name="refresh-cw" size={24} color="#BDBDBD" />
-              </TouchableOpacity>
-            </>
-          ) : photo ? (
+          {photo ? (
             <PhotoView src={photo} />
           ) : (
             <Camera
