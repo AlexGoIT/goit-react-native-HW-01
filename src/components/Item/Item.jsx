@@ -9,6 +9,7 @@ import {
   CommentCounter,
   LikeIcon,
   LikesCounter,
+  MapPinButton,
 } from "./Item.styled";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native";
@@ -18,6 +19,8 @@ const Item = ({ item }) => {
 
   const { image, title, location, comments, likes } = item;
   const commentsCount = comments.length;
+
+  console.log(image);
 
   return (
     <ItemWrapper>
@@ -57,8 +60,10 @@ const Item = ({ item }) => {
           {likes}
         </LikesCounter>
 
-        <MapPinIcon name="map-pin" size={24} color="#BDBDBD" />
-        <LocationText>{location}</LocationText>
+        <MapPinButton onPress={() => navigation.navigate("Map", { location })}>
+          <MapPinIcon name="map-pin" size={24} color="#BDBDBD" />
+        </MapPinButton>
+        <LocationText>{location.name}</LocationText>
       </ItemDescriptionWrapper>
     </ItemWrapper>
   );

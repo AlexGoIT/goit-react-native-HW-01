@@ -7,7 +7,7 @@ import RegistrationScreen from "../../screens/RegistrationScreen";
 import BottomTabsNavigation from "../BottomTabsNavigation";
 
 import CommentsScreen from "../../screens/CommentsScreen";
-import CreatePostScreen from "../../screens/CreatePostsScreen/CreatePostScreen";
+import MapScreen from "../../screens/MapScreen";
 
 const MainStack = createStackNavigator();
 
@@ -27,6 +27,15 @@ const AppNavigation = () => {
           options={{
             headerShown: true,
             headerTitle: "Коментарі",
+            headerTitleAlign: "center",
+          }}
+        />
+        <MainStack.Screen
+          name="Map"
+          component={MapScreen}
+          options={{
+            headerShown: true,
+            headerTitle: "Мапа",
             headerTitleAlign: "center",
           }}
         />

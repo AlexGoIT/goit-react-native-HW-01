@@ -22,8 +22,7 @@ import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { useNavigation } from "@react-navigation/native";
 import { useInputFormReducer } from "../../hooks/useInputFormReducer";
-import { Alert, Text } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Alert } from "react-native";
 
 import * as Location from "expo-location";
 import Loader from "../../components/Loader";
@@ -97,8 +96,7 @@ const CreatePostScreen = () => {
     setPost({
       image: photo,
       title: inputsValue.photoName,
-      locationName: inputsValue.locationName,
-      location: coords,
+      location: { ...coords, name: locationName },
       likes: 0,
       comments: [],
       id: Date.now(),
