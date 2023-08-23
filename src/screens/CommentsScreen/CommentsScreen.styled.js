@@ -50,3 +50,11 @@ export const CommentButton = styles.TouchableOpacity`
   border-radius: 17px;
   background-color: #FF6C00;
 `;
+
+export const NotCommentedText = styles.Text`
+  margin-top: 32px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+`;

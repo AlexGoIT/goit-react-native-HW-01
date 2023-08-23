@@ -14,6 +14,7 @@ export const CommentAvatar = styles.Image`
 `;
 
 export const CommentWrapper = styles.View`
+  width: 80%;
   margin-left: 16px;
   padding: 16px;
   border-radius: 0px 6px 6px 6px;

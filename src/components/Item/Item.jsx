@@ -10,8 +10,12 @@ import {
   LikeIcon,
   LikesCounter,
 } from "./Item.styled";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
 
 const Item = ({ item }) => {
+  const navigation = useNavigation();
+
   const { image, title, location, comments, likes } = item;
   const commentsCount = comments.length;
 
@@ -23,12 +27,17 @@ const Item = ({ item }) => {
         style={{ width: "100%", height: 240, borderRadius: 8 }}
       />
       <ItemTitle>{title}</ItemTitle>
+
       <ItemDescriptionWrapper>
-        <CommentIcon
-          name="message-circle"
-          size={24}
-          color={commentsCount > 0 ? "#FF6C00" : "#BDBDBD"}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Comments", { id: item.id })}
+        >
+          <CommentIcon
+            name="message-circle"
+            size={24}
+            color={commentsCount > 0 ? "#FF6C00" : "#BDBDBD"}
+          />
+        </TouchableOpacity>
         <CommentCounter
           style={
             commentsCount > 0 ? { color: "#212121" } : { color: "#BDBDBD" }

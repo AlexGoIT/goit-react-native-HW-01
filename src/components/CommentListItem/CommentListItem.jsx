@@ -10,7 +10,7 @@ const CommentListItem = ({ item }) => {
   const { author_avatar, comment } = item;
   return (
     <CommentContainer>
-      <CommentAvatar source={author_avatar} alt="author avatar" />
+      <CommentAvatar src={author_avatar} alt="author avatar" />
       <CommentWrapper>
         <CommentText>{comment}</CommentText>
         <CommentDate>09 червня, 2020 | 08:40</CommentDate>
