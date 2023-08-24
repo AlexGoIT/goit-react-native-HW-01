@@ -105,7 +105,7 @@ const CreatePostScreen = () => {
     });
 
     if (!post) {
-      Alert.alert("Не вдалося створити пост");
+      Alert.alert("Не вдалося створити пост, повторіть спробу");
       return;
     }
 
