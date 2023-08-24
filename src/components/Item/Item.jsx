@@ -1,4 +1,5 @@
-import { Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity, Image } from "react-native";
 import {
   ItemWrapper,
   ItemTitle,
@@ -11,16 +12,12 @@ import {
   LikesCounter,
   MapPinButton,
 } from "./Item.styled";
-import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
 
 const Item = ({ item }) => {
   const navigation = useNavigation();
 
   const { image, title, location, comments, likes } = item;
   const commentsCount = comments.length;
-
-  console.log(image);
 
   return (
     <ItemWrapper>

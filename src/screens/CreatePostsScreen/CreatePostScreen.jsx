@@ -1,3 +1,5 @@
+import "react-native-get-random-values";
+import { nanoid } from "nanoid";
 import { useEffect, useReducer, useState } from "react";
 import {
   BackgroundView,
@@ -99,8 +101,13 @@ const CreatePostScreen = () => {
       location: { ...coords, name: locationName },
       likes: 0,
       comments: [],
-      id: Date.now(),
+      id: nanoid(),
     });
+
+    if (!post) {
+      Alert.alert("Не вдалося створити пост");
+      return;
+    }
 
     console.log(post);
 
