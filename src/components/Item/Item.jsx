@@ -1,4 +1,5 @@
-import { Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity, Image } from "react-native";
 import {
   ItemWrapper,
   ItemTitle,
@@ -9,9 +10,12 @@ import {
   CommentCounter,
   LikeIcon,
   LikesCounter,
+  MapPinButton,
 } from "./Item.styled";
 
 const Item = ({ item }) => {
+  const navigation = useNavigation();
+
   const { image, title, location, comments, likes } = item;
   const commentsCount = comments.length;
 
@@ -23,12 +27,17 @@ const Item = ({ item }) => {
         style={{ width: "100%", height: 240, borderRadius: 8 }}
       />
       <ItemTitle>{title}</ItemTitle>
+
       <ItemDescriptionWrapper>
-        <CommentIcon
-          name="message-circle"
-          size={24}
-          color={commentsCount > 0 ? "#FF6C00" : "#BDBDBD"}
-        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Comments", { id: item.id })}
+        >
+          <CommentIcon
+            name="message-circle"
+            size={24}
+            color={commentsCount > 0 ? "#FF6C00" : "#BDBDBD"}
+          />
+        </TouchableOpacity>
         <CommentCounter
           style={
             commentsCount > 0 ? { color: "#212121" } : { color: "#BDBDBD" }
@@ -48,8 +57,10 @@ const Item = ({ item }) => {
           {likes}
         </LikesCounter>
 
-        <MapPinIcon name="map-pin" size={24} color="#BDBDBD" />
-        <LocationText>{location}</LocationText>
+        <MapPinButton onPress={() => navigation.navigate("Map", { location })}>
+          <MapPinIcon name="map-pin" size={24} color="#BDBDBD" />
+        </MapPinButton>
+        <LocationText>{location.name}</LocationText>
       </ItemDescriptionWrapper>
     </ItemWrapper>
   );

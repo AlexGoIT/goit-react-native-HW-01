@@ -3,7 +3,11 @@
     "id": 1,
     "title": "Ліс",
     "image": "https://i.ibb.co/8sLDFZy/image01.png",
-    "location": "Ivano-Frankivs'k Region, Ukraine",
+    "location": {
+      "latitude": 48.931344,
+      "longitude": 25.128345,
+      "name": "Ivano-Frankivs'k Region, Ukraine"
+    },
     "comments": [
       {
         "id": 1,
@@ -32,7 +36,11 @@
     "id": 2,
     "title": "Захід на Чорному морі",
     "image": "https://i.ibb.co/yVqysn3/image02.png",
-    "location": "Ukraine",
+    "location": {
+      "latitude": 45.349186,
+      "longitude": 32.495733,
+      "name": "Ukraine"
+    },
     "comments": [],
     "likes": 0
   },
@@ -40,7 +48,11 @@
     "id": 3,
     "title": "Старий будиночок у Венеції",
     "image": "https://i.ibb.co/gP1Xjb1/image03.png",
-    "location": "Italy",
+    "location": {
+      "latitude": 45.440144,
+      "longitude": 12.322846,
+      "name": "Italy"
+    },
     "comments": [
       {
         "id": 1,

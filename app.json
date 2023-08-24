@@ -20,10 +20,21 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.alex_2023.reactnativehomework",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBMM7jkPpce1nXkXdl9TE9l-9cAIIh0gD4"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5dc22cac-ce9d-4c0c-8d20-13b79f6eab7a"
+      }
     }
   }
 }

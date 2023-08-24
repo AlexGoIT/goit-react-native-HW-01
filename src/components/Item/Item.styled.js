@@ -38,9 +38,11 @@ margin-left: 6px;
   font-size: 16px;
 `;
 
-export const MapPinIcon = styles(Feather)`
+export const MapPinButton = styles.TouchableOpacity`
   margin-left: auto;
 `;
+
+export const MapPinIcon = styles(Feather)``;
 
 export const LocationText = styles.Text`
   margin-left: 4px;

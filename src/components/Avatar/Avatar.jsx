@@ -1,7 +1,7 @@
 const Avatar = ({ image }) => {
   return (
     <AvatarWrapper>
-      <AvatarImage source={image} />
+      <AvatarImage src={image} />
       <AddAvatarButtonWrapper>
         <AddAvatarButtonImage source={addImage} />
       </AddAvatarButtonWrapper>
