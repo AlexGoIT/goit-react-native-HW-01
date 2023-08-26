@@ -8,14 +8,18 @@ import BottomTabsNavigation from "../BottomTabsNavigation";
 
 import CommentsScreen from "../../screens/CommentsScreen";
 import MapScreen from "../../screens/MapScreen";
+// import { useSelector } from "react-redux";
+// import { selectIsAuthorized } from "../../redux/auth/authSelectors";
 
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
+  // const isAuthorized = useSelector(selectIsAuthorized);
+
   return (
     <NavigationContainer>
       <MainStack.Navigator
-        initialRouteName="Login"
+        initialRouteName={"Login"}
         screenOptions={{ headerShown: false }}
       >
         <MainStack.Screen name="Login" component={LoginScreen} />

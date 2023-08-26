@@ -22,7 +22,7 @@ const Item = ({ item }) => {
   return (
     <ItemWrapper>
       <Image
-        src={image}
+        source={{ uri: image }}
         alt={title}
         style={{ width: "100%", height: 240, borderRadius: 8 }}
       />

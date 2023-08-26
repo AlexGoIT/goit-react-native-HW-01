@@ -6,20 +6,26 @@ import {
   ProfileName,
   ProfileEmail,
 } from "./PostsScreen.styled";
-import profileImage from "../../../assets/profile_image.png";
 
 import posts from "../../constants/posts.json";
 import { FlatList } from "react-native";
 import Item from "../../components/Item";
 
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelectors";
+
 const PostsScreen = () => {
+  const user = useSelector(selectUser);
+
+  const { displayName, email, photoURL } = user;
+
   return (
     <BackgroundView>
       <ProfileWrapper>
-        <ProfileImage source={profileImage} />
+        <ProfileImage source={{ uri: photoURL }} />
         <ProfileDetailsWrapper>
-          <ProfileName>Natali Romanova</ProfileName>
-          <ProfileEmail>email@example.com</ProfileEmail>
+          <ProfileName>{displayName}</ProfileName>
+          <ProfileEmail>{email}</ProfileEmail>
         </ProfileDetailsWrapper>
       </ProfileWrapper>
 

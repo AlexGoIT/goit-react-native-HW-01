@@ -1,4 +1,5 @@
 import {
+  Alert,
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -10,7 +11,6 @@ import { Feather } from "@expo/vector-icons";
 import bgImage from "../../../assets/bg_photo.png";
 
 import {
-  AddAvatarButtonImage,
   AddAvatarButtonWrapper,
   AvatarWrapper,
   BackgroundView,
@@ -38,19 +38,30 @@ import {
   passwordValidate,
 } from "../../utils/validators";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectError,
+  selectIsAuthorized,
+} from "../../redux/auth/authSelectors";
+import { registerDB } from "../../redux/auth/authOperations";
+
 const RegistrationScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [loginError, setLoginError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(true);
-  const [inputsValue, dispatch] = useReducer(useInputFormReducer, {
+  const [inputsValue, dispatchForm] = useReducer(useInputFormReducer, {
     name: "",
     email: "",
     password: "",
   });
 
   const { name, email, password } = inputsValue;
+
+  const error = useSelector(selectError);
+  const isAuthorized = useSelector(selectIsAuthorized);
 
   const handleSubmit = () => {
     if (!loginValidate(name)) {
@@ -74,11 +85,27 @@ const RegistrationScreen = () => {
       setPasswordError(false);
     }
 
-    console.log(inputsValue);
+    dispatch(
+      registerDB({
+        name,
+        email,
+        password,
+        photoURL: "http://picsum.photos/200",
+      })
+    );
 
-    dispatch({ type: "name", payload: "" });
-    dispatch({ type: "email", payload: "" });
-    dispatch({ type: "password", payload: "" });
+    if (error) {
+      Alert.alert("Помилка", error);
+      return;
+    }
+
+    // if (!isAuthorized) {
+    //   return;
+    // }
+
+    dispatchForm({ type: "name", payload: "" });
+    dispatchForm({ type: "email", payload: "" });
+    dispatchForm({ type: "password", payload: "" });
 
     navigation.reset({
       index: 0,
@@ -91,7 +118,7 @@ const RegistrationScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
           <AvatarWrapper>
-            <AvatarImage source={null} />
+            <AvatarImage source={{ uri: "https://picsum.photos/200" }} />
             <AddAvatarButtonWrapper style={{ borderColor: "#FF6C00" }}>
               <Feather
                 name="plus"
@@ -110,7 +137,7 @@ const RegistrationScreen = () => {
                   name="name"
                   value={name}
                   onChangeText={(text) => {
-                    dispatch({ type: "name", payload: text });
+                    dispatchForm({ type: "name", payload: text });
                   }}
                   placeholder="Логін"
                   keyboardType="default"
@@ -124,7 +151,7 @@ const RegistrationScreen = () => {
                   name="email"
                   value={email}
                   onChangeText={(text) => {
-                    dispatch({ type: "email", payload: text });
+                    dispatchForm({ type: "email", payload: text });
                   }}
                   placeholder="Адреса електронної пошти"
                   keyboardType="email-address"
@@ -141,7 +168,7 @@ const RegistrationScreen = () => {
                     name="password"
                     value={password}
                     onChangeText={(text) => {
-                      dispatch({ type: "password", payload: text });
+                      dispatchForm({ type: "password", payload: text });
                     }}
                     placeholder="Пароль"
                     textContentType="password"
