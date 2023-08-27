@@ -7,10 +7,11 @@ import {
 } from "./CommentListItem.styled";
 
 const CommentListItem = ({ item }) => {
-  const { author_avatar, comment } = item;
+  const { authorAvatarURL, comment } = item;
+
   return (
     <CommentContainer>
-      <CommentAvatar src={author_avatar} alt="author avatar" />
+      <CommentAvatar src={authorAvatarURL} alt="author avatar" />
       <CommentWrapper>
         <CommentText>{comment}</CommentText>
         <CommentDate>09 червня, 2020 | 08:40</CommentDate>

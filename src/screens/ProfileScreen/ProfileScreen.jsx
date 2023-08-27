@@ -9,7 +9,7 @@ import {
   UserName,
 } from "./ProfileScreen.styled";
 import Item from "../../components/Item";
-import posts from "../../constants/posts.json";
+// import posts from "../../constants/posts.json";
 
 import { Feather } from "@expo/vector-icons";
 import bgImage from "../../../assets/bg_photo.png";
@@ -18,6 +18,9 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelectors";
 import { logoutDB } from "../../redux/auth/authOperations";
+import { selectPosts } from "../../redux/posts/postsSelectors";
+import { useEffect } from "react";
+import { fetchPosts } from "../../redux/posts/postsOperations";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -25,6 +28,12 @@ const ProfileScreen = () => {
 
   const user = useSelector(selectUser);
   const { displayName, photoURL } = user;
+
+  const posts = useSelector(selectPosts);
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logoutDB());
