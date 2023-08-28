@@ -31,6 +31,7 @@ import Loader from "../../components/Loader";
 import { createPost } from "../../redux/posts/postsOperations";
 import { ActivityIndicator } from "react-native-paper";
 import { useDispatch } from "react-redux";
+import { uploadFile } from "../../firebase/storage";
 
 const CreatePostScreen = () => {
   const dispatch = useDispatch();
@@ -73,9 +74,9 @@ const CreatePostScreen = () => {
     }
 
     const { uri } = await cameraRef.takePictureAsync();
-    await MediaLibrary.createAssetAsync(uri);
+    const photoPath = await MediaLibrary.createAssetAsync(uri);
 
-    setPhoto(uri);
+    setPhoto(photoPath);
     setDisabled(false);
   };
 
@@ -100,22 +101,20 @@ const CreatePostScreen = () => {
       longitude: location.coords.longitude,
     };
 
+    const photoURL = await uploadFile(photo);
+
     const post = {
-      // imageURL: photo,
-      imageURL: "https://picsum.photos/200",
+      imageURL: photoURL,
       title: inputsValue.photoName,
       location: { ...coords, name: locationName },
       likes: 0,
       comments: [],
-      // id: nanoid(),
     };
 
     if (!post) {
       Alert.alert("Не вдалося створити пост, повторіть спробу");
       return;
     }
-
-    console.log("createPostScreen", post);
 
     dispatch(createPost(post));
 
@@ -136,7 +135,7 @@ const CreatePostScreen = () => {
       <BackgroundView>
         <ImageWrapper>
           {photo ? (
-            <PhotoView src={photo} />
+            <PhotoView source={photo} />
           ) : (
             <Camera
               type={type}
