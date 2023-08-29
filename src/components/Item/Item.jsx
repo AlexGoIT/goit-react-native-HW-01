@@ -12,17 +12,20 @@ import {
   LikesCounter,
   MapPinButton,
 } from "./Item.styled";
+import { useDispatch } from "react-redux";
+import { incrementLike } from "../../redux/posts/postsOperations";
 
 const Item = ({ item }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const { image, title, location, comments, likes } = item;
+  const { imageURL, title, location, comments, likes } = item;
   const commentsCount = comments.length;
 
   return (
     <ItemWrapper>
       <Image
-        src={image}
+        source={{ uri: imageURL }}
         alt={title}
         style={{ width: "100%", height: 240, borderRadius: 8 }}
       />
@@ -46,16 +49,21 @@ const Item = ({ item }) => {
           {commentsCount}
         </CommentCounter>
 
-        <LikeIcon
-          name="thumbs-up"
-          size={24}
-          color={likes > 0 ? "#FF6C00" : "#BDBDBD"}
-        />
-        <LikesCounter
-          style={likes > 0 ? { color: "#212121" } : { color: "#BDBDBD" }}
+        <TouchableOpacity
+          style={{ flexDirection: "row", alignItems: "center" }}
+          onPress={() => dispatch(incrementLike(item.id))}
         >
-          {likes}
-        </LikesCounter>
+          <LikeIcon
+            name="thumbs-up"
+            size={24}
+            color={likes > 0 ? "#FF6C00" : "#BDBDBD"}
+          />
+          <LikesCounter
+            style={likes > 0 ? { color: "#212121" } : { color: "#BDBDBD" }}
+          >
+            {likes}
+          </LikesCounter>
+        </TouchableOpacity>
 
         <MapPinButton onPress={() => navigation.navigate("Map", { location })}>
           <MapPinIcon name="map-pin" size={24} color="#BDBDBD" />

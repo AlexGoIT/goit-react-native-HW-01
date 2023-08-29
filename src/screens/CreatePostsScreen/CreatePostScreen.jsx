@@ -28,11 +28,16 @@ import { Alert } from "react-native";
 
 import * as Location from "expo-location";
 import Loader from "../../components/Loader";
+import { createPost } from "../../redux/posts/postsOperations";
+import { ActivityIndicator } from "react-native-paper";
+import { useDispatch } from "react-redux";
+import { uploadFile } from "../../firebase/storage";
 
 const CreatePostScreen = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const [inputsValue, dispatch] = useReducer(useInputFormReducer, {
+  const [inputsValue, dispatchForm] = useReducer(useInputFormReducer, {
     photoName: "",
     locationName: "",
   });
@@ -44,16 +49,17 @@ const CreatePostScreen = () => {
   const [cameraRef, setCameraRef] = useState(null);
   const [photo, setPhoto] = useState(null);
 
-  const [loader, setLoader] = useState(false);
-  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [post, setPost] = useState(null);
 
-  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [cameraPermission, requestCameraPermission] =
+    Camera.useCameraPermissions();
   const [locationStatus, requestLocation] = Location.useForegroundPermissions();
 
   useEffect(() => {
     (async () => {
       await MediaLibrary.requestPermissionsAsync();
-      await requestPermission();
+      await requestCameraPermission();
       await requestLocation();
     })();
   }, []);
@@ -63,14 +69,14 @@ const CreatePostScreen = () => {
       return;
     }
 
-    if (permission?.status !== "granted") {
+    if (cameraPermission?.status !== "granted") {
       await requestPermission();
     }
 
     const { uri } = await cameraRef.takePictureAsync();
-    await MediaLibrary.createAssetAsync(uri);
+    const photoPath = await MediaLibrary.createAssetAsync(uri);
 
-    setPhoto(uri);
+    setPhoto(photoPath);
     setDisabled(false);
   };
 
@@ -86,38 +92,39 @@ const CreatePostScreen = () => {
       return;
     }
 
-    setLoader(true);
+    setIsLoading(true);
     const location = await Location.getCurrentPositionAsync();
-    setLoader(false);
+    setIsLoading(false);
 
     const coords = {
       latitude: location.coords.latitude,
       longitude: location.coords.longitude,
     };
 
-    setPost({
-      image: photo,
+    const photoURL = await uploadFile(photo);
+
+    const post = {
+      imageURL: photoURL,
       title: inputsValue.photoName,
       location: { ...coords, name: locationName },
       likes: 0,
       comments: [],
-      id: nanoid(),
-    });
+    };
 
     if (!post) {
       Alert.alert("Не вдалося створити пост, повторіть спробу");
       return;
     }
 
-    console.log(post);
+    dispatch(createPost(post));
 
     reset();
     navigation.navigate("Posts");
   };
 
   const reset = () => {
-    dispatch({ type: "photoName", payload: "" });
-    dispatch({ type: "locationName", payload: "" });
+    dispatchForm({ type: "photoName", payload: "" });
+    dispatchForm({ type: "locationName", payload: "" });
 
     setPhoto(null);
     setDisabled(true);
@@ -128,7 +135,7 @@ const CreatePostScreen = () => {
       <BackgroundView>
         <ImageWrapper>
           {photo ? (
-            <PhotoView src={photo} />
+            <PhotoView source={photo} />
           ) : (
             <Camera
               type={type}
@@ -154,7 +161,7 @@ const CreatePostScreen = () => {
             name="photoName"
             value={photoName}
             onChangeText={(text) =>
-              dispatch({ type: "photoName", payload: text })
+              dispatchForm({ type: "photoName", payload: text })
             }
             placeholder="Назва..."
           />
@@ -163,7 +170,7 @@ const CreatePostScreen = () => {
               name="locationName"
               value={locationName}
               onChangeText={(text) =>
-                dispatch({ type: "locationName", payload: text })
+                dispatchForm({ type: "locationName", payload: text })
               }
               placeholder="Місцевість..."
             />
@@ -185,7 +192,13 @@ const CreatePostScreen = () => {
             Опублікувати
           </PostButtonText>
         </PostButton>
-        {loader && <Loader />}
+        {isLoading && (
+          <ActivityIndicator
+            size="large"
+            color={"#FF6C00"}
+            style={{ marginTop: 20 }}
+          />
+        )}
         <DeleteButton disabled={disabled} onPress={() => reset()}>
           <Feather
             name="trash-2"

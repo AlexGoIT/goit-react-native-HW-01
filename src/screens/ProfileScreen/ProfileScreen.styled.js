@@ -38,6 +38,7 @@ export const AvatarWrapper = styles.View`
 export const AvatarImage = styles.Image`
   width: 120px;
   height: 120px;
+  border-radius: 16px;
 `;
 
 export const AddAvatarButtonWrapper = styles.TouchableOpacity`

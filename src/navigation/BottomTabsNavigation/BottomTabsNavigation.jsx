@@ -8,13 +8,18 @@ import ProfileScreen from "../../screens/ProfileScreen";
 
 import BottomTabs from "../BottomTabs";
 import LogoutButton from "../../components/LogoutButton";
+import { useDispatch } from "react-redux";
+import { logoutDB } from "../../redux/auth/authOperations";
 
 const Tabs = createBottomTabNavigator();
 
 const BottomTabsNavigation = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handleLogout = () => {
+    dispatch(logoutDB());
+
     navigation.reset({
       index: 0,
       routes: [{ name: "Login" }],

@@ -24,22 +24,44 @@ import {
   ErrorText,
 } from "./LoginScreen.styled";
 
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useInputFormReducer } from "../../hooks/useInputFormReducer";
 import { emailValidate, passwordValidate } from "../../utils/validators";
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectError,
+  selectIsAuthorized,
+} from "../../redux/auth/authSelectors";
+import { authStateChanged, loginDB } from "../../redux/auth/authOperations";
+import { Alert } from "react-native";
 
+const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(true);
-  const [inputsValue, dispatch] = useReducer(useInputFormReducer, {
+  const [inputsValue, dispatchForm] = useReducer(useInputFormReducer, {
     email: "",
     password: "",
   });
 
   const { email, password } = inputsValue;
+
+  const error = useSelector(selectError);
+  const isAuthorized = useSelector(selectIsAuthorized);
+
+  useEffect(() => {
+    dispatch(authStateChanged());
+
+    if (isAuthorized) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    }
+  }, []);
 
   const handleSubmit = () => {
     if (!emailValidate(email)) {
@@ -56,10 +78,20 @@ const LoginScreen = () => {
       setPasswordError(false);
     }
 
-    console.log(inputsValue);
+    dispatch(
+      loginDB({
+        email,
+        password,
+      })
+    );
 
-    dispatch({ type: "email", payload: "" });
-    dispatch({ type: "password", payload: "" });
+    if (error) {
+      Alert.alert("Помилка", error);
+      return;
+    }
+
+    dispatchForm({ type: "email", payload: "" });
+    dispatchForm({ type: "password", payload: "" });
 
     navigation.reset({
       index: 0,
@@ -79,7 +111,7 @@ const LoginScreen = () => {
                   name="email"
                   value={email}
                   onChangeText={(text) =>
-                    dispatch({ type: "email", payload: text })
+                    dispatchForm({ type: "email", payload: text })
                   }
                   placeholder="Адреса електронної пошти"
                   keyboardType="email-address"
@@ -96,7 +128,7 @@ const LoginScreen = () => {
                     name="password"
                     value={password}
                     onChangeText={(text) =>
-                      dispatch({ type: "password", payload: text })
+                      dispatchForm({ type: "password", payload: text })
                     }
                     placeholder="Пароль"
                     textContentType="password"
